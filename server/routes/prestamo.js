@@ -4,7 +4,7 @@ const Prestamo = require('../models/prestamo');
 const { verificaToken } = require('../middleware/autenticacion');
 const app = express();
 
-app.get('/prestamo', (req, res) => {
+app.get('/prestamo', [verificaToken], (req, res) => {
     Prestamo.find()
         .exec((err, prestamos) => {
             if (err) {
@@ -22,7 +22,7 @@ app.get('/prestamo', (req, res) => {
         });
 });
 
-app.post('/prestamo', (req, res) => {
+app.post('/prestamo', [verificaToken], (req, res) => {
     let body = req.body;
 
     let prestamo = new Prestamo({
