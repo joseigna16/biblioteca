@@ -6,7 +6,7 @@ const Libro = require('../models/libro');
 
 //get 
 
-app.get('/libro', [verificaToken], function(req, res) {
+app.get('/libro', function(req, res) {
     Libro.find({ disponible: true })
         .exec((err, libros) => {
             if (err) {
